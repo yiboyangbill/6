@@ -1,0 +1,28 @@
+-----------------------------------------------------------------------------------------
+--
+-- main.lua
+--
+-----------------------------------------------------------------------------------------
+
+-- Your code here
+display.newText( "PI", display.contentCenterX, display.contentCenterY -160, native.systemFont, 30 )
+local answerTextField = native.newTextField( display.contentCenterX, display.contentCenterY + -120, 300, 40 )
+answerTextField.id = "answerTextField"
+local image = display.newImageRect( "enterButton.png", 150, 75 )
+image.x = display.contentCenterX
+image.y = 185
+image.id = "calculatebutton"
+display.newText( "enter a number", display.contentCenterX, display.contentCenterY, native.systemFont, 30 )
+local numberTextField = native.newTextField( display.contentCenterX, display.contentCenterY + 50, 300, 40 )
+numberTextField.id = "numberTextField"
+numberTextField.inputType="number"
+local function calculateButtonTouch( event )
+	local PI = 0
+	local number = tonumber(numberTextField.text)
+    for i = 0,number,1
+    	do
+    	PI = PI + 2*(((-1)^(i-1))/(2*(i-1)+1))
+    end
+    answerTextField.text = tostring(PI)
+end
+image:addEventListener( "touch", calculateButtonTouch )
